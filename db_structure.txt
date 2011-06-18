@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: internal-db.s96975.gridserver.com
--- Generation Time: Jun 18, 2011 at 07:34 AM
+-- Generation Time: Jun 18, 2011 at 09:12 AM
 -- Server version: 5.1.55
 -- PHP Version: 4.4.9
 
@@ -29,6 +29,7 @@ CREATE TABLE `accounts` (
   `password` varchar(50) NOT NULL,
   `balance` text NOT NULL,
   `time_updated` varchar(10) NOT NULL,
+  `salt` varchar(32) NOT NULL,
   PRIMARY KEY (`account_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
