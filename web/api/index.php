@@ -4,6 +4,7 @@
  */
 
   include ('../../lib/fitzgerald.php');
+  require_once('../../lib/config.inc.php');
 
   class TraederApi extends Fitzgerald {
     // Define your controller methods, remembering to return a value for the browser!
@@ -16,6 +17,7 @@
     {
     	return 'you want to view an account';
     }
+
   }
 
   $app = new TraederApi();
