@@ -1,0 +1,66 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.11.3
+-- http://www.phpmyadmin.net
+--
+-- Host: internal-db.s96975.gridserver.com
+-- Generation Time: Jun 18, 2011 at 07:34 AM
+-- Server version: 5.1.55
+-- PHP Version: 4.4.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `db96975_traeder`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `account_id` int(8) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `address_1` varchar(50) NOT NULL,
+  `address_2` varchar(50) NOT NULL,
+  `address_3` varchar(50) NOT NULL,
+  `post_code` text NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `balance` text NOT NULL,
+  `time_updated` varchar(10) NOT NULL,
+  PRIMARY KEY (`account_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_identities`
+--
+
+CREATE TABLE `phone_identities` (
+  `phone_id` int(10) NOT NULL AUTO_INCREMENT,
+  `account_id` int(10) NOT NULL,
+  `active` text NOT NULL,
+  `confirmed` text NOT NULL,
+  `time_updated` varchar(10) NOT NULL,
+  PRIMARY KEY (`phone_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `transaction_id` int(10) NOT NULL AUTO_INCREMENT,
+  `account_id` int(10) NOT NULL,
+  `amount` int(10) NOT NULL,
+  `units` varchar(20) NOT NULL,
+  `code` int(15) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `expires` varchar(10) NOT NULL,
+  `time_stamp` varchar(10) NOT NULL,
+  PRIMARY KEY (`transaction_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
