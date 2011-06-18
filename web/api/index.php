@@ -24,6 +24,7 @@
     	$return = '['."\n";
 
     	//$return .= '{ID: "'.$account->id().'", name: "'.$account->name().'", address: "'.$account->address().'"},'."\n";
+    	$return .= '{Balance: "'.$account->balance().'"},'."\n";
 
     	$return .= '  ]'."\n";
     	return $return;

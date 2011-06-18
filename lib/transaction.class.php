@@ -4,7 +4,7 @@
  *
  */
 
-class transaction
+class Transaction
 {
 	function __construct()
 	{

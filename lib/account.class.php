@@ -1,4 +1,7 @@
 ﻿<?php
+
+require_once('config.inc.php');
+
 /*
  * account.php
  * Basic account information
@@ -7,10 +10,11 @@
 class Account {
 
   /* properties */
+  protected $id;
   public $name;
-  private $password;
-  private $salt;
-  public $balance;
+  protected $password;
+  protected $salt;
+  public $balance = 1.00;
 
 	function __construct()
 	{
@@ -36,11 +40,27 @@ class Account {
 	}
 
   static function authenticate($username, $password) {
-    return new Account();
+    // Find by username
+    $acct = Account::find($username);
+    if($acct == null)
+      return null;
+    // Check password
+    if ($acct->checkPassword($password) == false)
+      return null;
+    // OK
+    return $acct;
   }
 
   static function find($username) {
-    return new Account();
+    // Fetch from DB
+    global $db; 
+    $stmt = $db->prepare("SELECT * FROM accounts WHERE name=?");
+    $stmt->bind_param('i', $username);
+    $stmt->execute();
+    $stmt->close();
+    // Store attributes
+    $acct = new Account();
+    return $acct;
   }
 
   function storePassword($plaintext) {
@@ -52,21 +72,42 @@ class Account {
   		$this->salt .= $characterList{mt_rand(0,strlen($characterList))};
   		$i++;
   	} while ($i < 16);
-    $this->password = sha1($this->salt . $plaintext);
+    $this->password = $this->cryptPassword($plaintext);
+  }
+
+  function checkPassword($plaintext) {
+    return ($this->password == $this->cryptPassword($plaintext));
+  }
+
+  function cryptPassword($plaintext) {
+    return sha1($this->salt . $plaintext);
+  }
+
+  function id() {
+    return $this->id;
   }
 
   function balance() {
-    return $balance;
+    return $this->balance;
   }
 
   function save() {
-    
+    global $db;
+    if ($id) {
+      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=? WHERE id=?");
+      $stmt->bind_param('sssi', $this->name, $this->salt, $this->password, $this->id);
+      $stmt->execute();
+      $stmt->fetch();
+      $stmt->close();
+    }
+    else {
+      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password) VALUES (?,?,?)");
+      $stmt->bind_param('sss', $this->name, $this->salt, $this->password);
+      $stmt->execute();
+      $stmt->fetch();
+      $stmt->close();
+    }
   }
-
-	function updateAccount($data)
-	{
-
-	}
 
 	function addPhone($data)
 	{
@@ -84,7 +125,12 @@ class Account {
 	}
 
   function delete() {
-    
+    global $db; 
+    $stmt = $db->prepare("DELETE FROM accounts WHERE id=?");
+    $stmt->bind_param('i', $this->id);
+    $stmt->execute();
+    $stmt->fetch();
+    $stmt->close();
   }
 
 }
