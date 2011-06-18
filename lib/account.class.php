@@ -14,7 +14,7 @@ class Account {
   public $name;
   protected $password;
   protected $salt;
-  protected $balance;
+  public $balance = 1.00;
 
 	function __construct()
 	{
