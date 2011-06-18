@@ -62,7 +62,10 @@ class Account {
     $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id);
     $stmt->fetch();
     $stmt->close();
-    return $acct;
+    if($acct->id)
+      return $acct;
+    else
+      return null;
   }
 
   function storePassword($plaintext) {
@@ -125,8 +128,8 @@ class Account {
 	}
 
   function delete() {
-    global $db; 
-    $stmt = $db->prepare("DELETE FROM accounts WHERE id=?");
+    global $db;
+    $stmt = $db->prepare("DELETE FROM accounts WHERE account_id=?");
     $stmt->bind_param('i', $this->id);
     $stmt->execute();
     $stmt->close();

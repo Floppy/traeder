@@ -44,10 +44,10 @@ class AccountTest extends PHPUnit_Framework_TestCase
 
   /* Check we can delete accounts */
   public function testDeleteAccount() {
-    /*$acct = Account::find("test");
-    $acct->delete();
     $acct = Account::find("test");
-    $this->assertNull($acct);*/
+    $acct->delete();
+    $acct2 = Account::find("test");
+    $this->assertNull($acct2);
   }
   
 }
