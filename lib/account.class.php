@@ -10,7 +10,7 @@ class Account {
   public $name;
   private $password;
   private $salt;
-  public $balance;
+  public $balance = 1.00;
 
 	function __construct()
 	{
@@ -56,11 +56,11 @@ class Account {
   }
 
   function balance() {
-    return $balance;
+    return $this->balance;
   }
 
   function save() {
-    
+
   }
 
 	function updateAccount($data)
@@ -84,7 +84,7 @@ class Account {
 	}
 
   function delete() {
-    
+
   }
 
 }
