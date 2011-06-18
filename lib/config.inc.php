@@ -6,8 +6,8 @@ $_GLOBALS['db_password'] = 'traeder1';
 $_GLOBALS['db_host'] = 'localhost';
 
 
-$db = mysql_connect($_GLOBALS['db_host'], $_GLOBALS['db_user'], $_GLOBALS['db_password']);
-mysql_select_db($_GLOBALS['db_name']);
+$db = new mysqli($_GLOBALS['db_host'], $_GLOBALS['db_user'], $_GLOBALS['db_password'], $_GLOBALS['db_name']);
+//mysqli_select_db();
 if (!$db)
 {
 	echo 'Sorry missing database';
