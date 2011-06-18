@@ -5,6 +5,9 @@
 
   include ('../../lib/fitzgerald.php');
   require_once('../../lib/config.inc.php');
+  require_once('../../lib/account.class.php');
+  require_once('../../lib/transaction.class.php');
+
 
   class TraederApi extends Fitzgerald {
     // Define your controller methods, remembering to return a value for the browser!
@@ -15,7 +18,13 @@
 
     function get_account($accountID)
     {
-    	return 'you want to view an account '.$accountID;
+
+    	$return = '['."\n";
+    	foreach($tags as $id => $tag) {
+    		$return .= '{id: "'.$id.'", tag: "'.$tag.'"},'."\n";
+    	}
+    	$return .= '  ]'."\n";
+    	return $return;
     }
 
     function create_account()
