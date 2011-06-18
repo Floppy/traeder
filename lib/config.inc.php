@@ -6,7 +6,7 @@ $_GLOBALS['db_password'] = 'traeder1';
 $_GLOBALS['db_host'] = 'localhost';
 
 
-$db = mysql_connect($_GLOBALS['db_host'], $_GLOBALS['db_name'], $_GLOBALS['db_password']);
+$db = mysql_connect($_GLOBALS['db_host'], $_GLOBALS['db_user'], $_GLOBALS['db_password']);
 mysql_select_db($_GLOBALS['db_name']);
 if (!$db)
 {
