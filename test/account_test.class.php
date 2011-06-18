@@ -5,6 +5,14 @@ require_once('test_helper.php');
 class StackTest extends PHPUnit_Framework_TestCase
 {
     
+  /* Check we can't create new accounts if password isn't confirmed */
+  public function testCreateAccountFail() {
+    $acct = Account::create(array("username" => "test", 
+                                  "password" => "testpass",
+                                  "password_confirmation" => "wrong"));
+    $this->assertNull($acct);
+  }
+
   /* Check we can create new accounts */
   public function testCreateAccount() {
     $acct = Account::create(array("username" => "test", 

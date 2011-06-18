@@ -14,10 +14,21 @@ class Account {
 		return true;
 	}
 
-	function createAccount($data)
+	static function create($params)
 	{
-
+	  if ($params["password"] != $params["password_confirmation"]) {
+	    return null;
+	  }
+	  return new Account;
 	}
+
+  static function findByUserAndPassword($username, $password) {
+    return new Account();
+  }
+
+  static function findByUser($username) {
+    return new Account();
+  }
 
 	function updateAccount($data)
 	{
@@ -39,12 +50,8 @@ class Account {
 
 	}
 
-  static function findByUserAndPassword($username, $password) {
-    return new Account();
-  }
-
-  static function findByUser($username) {
-    return new Account();
+  function delete() {
+    
   }
 
 }
