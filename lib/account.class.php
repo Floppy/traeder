@@ -22,11 +22,11 @@ class Account {
 	  return new Account;
 	}
 
-  static function findByUserAndPassword($username, $password) {
+  static function authenticate($username, $password) {
     return new Account();
   }
 
-  static function findByUser($username) {
+  static function find($username) {
     return new Account();
   }
 

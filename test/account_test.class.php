@@ -19,31 +19,32 @@ class StackTest extends PHPUnit_Framework_TestCase
                                   "password" => "testpass",
                                   "password_confirmation" => "testpass"));
     $this->assertEquals("test", $acct->name);
+    $this->assertEquals(42.0, $acct->balance);
   }
 
   /* Check we can authenticate users */
-  public function testFindByUserAndPassword() {
-    $acct = Account::findByUserAndPassword("test", "testpass");
+  public function testAuthenticate() {
+    $acct = Account::authenticate("test", "testpass");
     $this->assertEquals("test", $acct->name);
   }
 
   /* Check that bad authentication details are handled */
-  public function testFindByUserAndBadPassword() {
-    $acct = Account::findByUserAndPassword("test", "wrong");
+  public function testAuthenticationFailure() {
+    $acct = Account::authenticate("test", "wrong");
     $this->assertNull($acct);
   }
   
   /* Check we can find without authenticating */
-  public function testFindById() {
-    $acct = Account::findByUser("test");
-    $this->assertEquals("test", $acct->name);    
+  public function testFind() {
+    $acct = Account::find("test");
+    $this->assertEquals("test", $acct->name);
   }
 
   /* Check we can delete accounts */
   public function testDeleteAccount() {
-    $acct = Account::findByUser("test");
+    $acct = Account::find("test");
     $acct->delete();
-    $acct = Account::findByUser("test");
+    $acct = Account::find("test");
     $this->assertNull($acct);
   }
   
