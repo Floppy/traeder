@@ -2,7 +2,7 @@
 
 require_once('test_helper.php');
 
-class StackTest extends PHPUnit_Framework_TestCase
+class AccountTest extends PHPUnit_Framework_TestCase
 {
   
   protected $backupGlobals = FALSE;
