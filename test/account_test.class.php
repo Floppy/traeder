@@ -13,7 +13,7 @@ class StackTest extends PHPUnit_Framework_TestCase
     $this->assertNull($acct);
   }
 
-  /* Check we can create new accounts */
+  /* Check we can create new accounts with an opening balance */
   public function testCreateAccount() {
     $acct = Account::create(array("username" => "test", 
                                   "password" => "testpass",
