@@ -21,17 +21,17 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE `accounts` (
   `account_id` int(8) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `address_1` varchar(50) NOT NULL,
-  `address_2` varchar(50) NOT NULL,
-  `address_3` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `address_1` varchar(50) NOT NULL DEFAULT '',
+  `address_2` varchar(50) NOT NULL DEFAULT '',
+  `address_3` varchar(50) NOT NULL DEFAULT '',
   `post_code` text NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `balance` text NOT NULL,
-  `time_updated` varchar(10) NOT NULL,
-  `salt` varchar(32) NOT NULL,
+  `password` varchar(50) NOT NULL DEFAULT '',
+  `balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `time_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `salt` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`account_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -41,12 +41,12 @@ CREATE TABLE `accounts` (
 
 CREATE TABLE `phone_identities` (
   `phone_id` int(10) NOT NULL AUTO_INCREMENT,
-  `account_id` int(10) NOT NULL,
+  `account_id` int(10) NOT NULL DEFAULT '0',
   `active` text NOT NULL,
   `confirmed` text NOT NULL,
-  `time_updated` varchar(10) NOT NULL,
+  `time_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`phone_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -65,3 +65,4 @@ CREATE TABLE `transactions` (
   `time_stamp` varchar(10) NOT NULL,
   PRIMARY KEY (`transaction_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
