@@ -4,7 +4,16 @@
  *
  */
 
-class transaction ()
+class transaction
 {
+	function __construct()
+	{
+		return true;
+	}
+
+	public function getTransaction($issueCode)
+	{
+
+	}
 
 }
