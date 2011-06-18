@@ -54,12 +54,14 @@ class Account {
   static function find($username) {
     // Fetch from DB
     global $db; 
-    $stmt = $db->prepare("SELECT * FROM accounts WHERE name=?");
-    $stmt->bind_param('i', $username);
+    $stmt = $db->prepare("SELECT name, salt, password, account_id FROM accounts WHERE name=?");
+    $stmt->bind_param('s', $username);
     $stmt->execute();
-    $stmt->close();
     // Store attributes
     $acct = new Account();
+    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id);
+    $stmt->fetch();
+    $stmt->close();
     return $acct;
   }
 
@@ -97,14 +99,12 @@ class Account {
       $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=? WHERE id=?");
       $stmt->bind_param('sssi', $this->name, $this->salt, $this->password, $this->id);
       $stmt->execute();
-      $stmt->fetch();
       $stmt->close();
     }
     else {
       $stmt = $db->prepare("INSERT INTO accounts (name, salt, password) VALUES (?,?,?)");
       $stmt->bind_param('sss', $this->name, $this->salt, $this->password);
       $stmt->execute();
-      $stmt->fetch();
       $stmt->close();
     }
   }
@@ -129,7 +129,6 @@ class Account {
     $stmt = $db->prepare("DELETE FROM accounts WHERE id=?");
     $stmt->bind_param('i', $this->id);
     $stmt->execute();
-    $stmt->fetch();
     $stmt->close();
   }
 
