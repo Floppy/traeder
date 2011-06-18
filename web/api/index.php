@@ -18,11 +18,13 @@
 
     function get_account($accountID)
     {
-
+			// call account.class and return details
+			$account = new Account();
+			//$data = account->getUserDetails($accountID);
     	$return = '['."\n";
-    	foreach($tags as $id => $tag) {
-    		$return .= '{id: "'.$id.'", tag: "'.$tag.'"},'."\n";
-    	}
+
+    	$return .= '{ID: "'.$account->id().'", name: "'.$account->name().'", address: "'.$account->address().'"},'."\n";
+
     	$return .= '  ]'."\n";
     	return $return;
     }
