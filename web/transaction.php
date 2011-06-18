@@ -1,37 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>traeder.org - transactions</title>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
-	<title>Traeder</title>
-	<link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-	<link rel="stylesheet" href="style/style.css" />
+	
+	<link rel="stylesheet" href="/style/jquery.mobile.css" />
+	<link rel="stylesheet" href="/style/style.css" />
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
-
-	<script type="text/javascript" src="/script/script.js"></script>	
-
 </head> 
-
-
 
 <body> 
 <div data-role="page" data-theme="b" id="jqm-home">
 	<div id='title'>
-		<h1>Traeder - Transaction</h1>
-
+		<h1>Traeder</h1>
+		
+		<a id='log_out' href='accounts/logout'>Log Out</a>
 	</div>
+
 	
 	<div data-role="content">
+		
+		<form action="transactions/new" method="post">
 
+				<div data-role="fieldcontain">
+					
+					<label for='new_transaction_type' class='select'>Transaction type</label>
+					
+					<select name='new_transaction_type' id='new_transaction_type' > 
+						<option value='credit'>Payment from me</option>
+						
+						<option value='debit'>Payment to me</option>
 
-		<lable for='login_username'>Username</label> 
-		<input type='text' id='login_username' 	name='login_username'/>
+					</select> 
+				
+				</div>
+				
+				<div data-role="fieldcontain">
+				
+					<lable for='new_transaction_amount'>Amount</label> 
+					<input type='text' id='new_transaction_amount' 	name='new_transaction_amount'/>			
+				
+				</div>
+				
+				<input type='submit' id='login_submit' name='login_submit' value='Log In' />
+				
+			</div>
+			
+		</form>
+		
 		
 	</div>
-	
-	
+
 </div>
 </body>
 </html>
