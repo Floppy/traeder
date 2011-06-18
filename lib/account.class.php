@@ -4,9 +4,12 @@
  * Basic account information
  */
 
-class account()
-{
-	__construct()
+class Account {
+
+  /* properties */
+  public $name;
+
+	function __construct()
 	{
 		return true;
 	}
@@ -35,4 +38,13 @@ class account()
 	{
 
 	}
+
+  static function findByUserAndPassword($username, $password) {
+    return new Account();
+  }
+
+  static function findByUser($username) {
+    return new Account();
+  }
+
 }
