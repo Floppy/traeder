@@ -308,7 +308,7 @@
                 $mapping = $this->mappings[$i];
                 $mountPoint = is_string($this->options->mountPoint) ? $this->options->mountPoint : '';
                 $url = new Url($mapping[0], $mapping[1], $mapping[3], $mountPoint);
-
+//print_r($url);
                 if($url->match) {
                     return $this->execute($mapping[2], $url->params);
                 }
