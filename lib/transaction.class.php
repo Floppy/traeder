@@ -86,8 +86,15 @@ class Transaction
     $this->status = 1;
     $this->save();
     // Create opposite transaction in client account
-    Transaction::create($acct, -$this->amount, false, $this->code);
-    // Update balances on both accounts maybe
+    return Transaction::create($acct, -$this->amount, false, $this->code);
   }
 
+  function delete() {
+    global $db;
+    $stmt = $db->prepare("DELETE FROM transactions WHERE transaction_id=?");
+    $stmt->bind_param('i', $this->id);
+    $stmt->execute();
+    $stmt->close();
+  }
+  
 }
