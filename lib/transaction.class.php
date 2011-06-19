@@ -77,6 +77,10 @@ class Transaction
     }
   }
   
+  public function account() {
+    return Account::findId($this->account_id);
+  }
+  
   public function accept($acct) {
     // Mark as no longer pending
     $this->status = 1;

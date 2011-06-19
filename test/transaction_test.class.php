@@ -11,15 +11,18 @@ class TransactionTest extends PHPUnit_Framework_TestCase
   static function setUpBeforeClass() {
     self::$vendor = Account::create(array("username" => "vendor",
                                     "password" => "testpass",
-                                    "password_confirmation" => "testpass"));
+                                    "password_confirmation" => "testpass",
+                                    "phone_number" => "12345"));
     self::$client = Account::create(array("username" => "client",
                                     "password" => "testpass",
-                                    "password_confirmation" => "testpass"));
+                                    "password_confirmation" => "testpass",
+                                    "phone_number" => "67890"));
   }
   
   function testTransactions() {
     // Create a transaction as the vendor
     $tr = Transaction::create(self::$vendor, 5.0, true);
+    $this->assertEquals($tr->account(), self::$vendor);
     $this->assertEquals(strlen($tr->code), 12);
     $this->assertEquals($tr->status, 0);
     $this->assertEquals($tr->account_id, self::$vendor->id);

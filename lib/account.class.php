@@ -3,9 +3,9 @@
 require_once('config.inc.php');
 
 /*
- * account.php
- * Basic account information
- */
+* account.php
+* Basic account information
+*/
 
 class Account {
 
@@ -19,27 +19,27 @@ class Account {
   protected $password;
   protected $salt;
 
-	function __construct()
-	{
-		return true;
-	}
+  function __construct()
+  {
+    return true;
+  }
 
-	static function create($params)
-	{
-	  if ($params["password"] != $params["password_confirmation"]) {
-	    return null;
-	  }
-	  // Create account
-	  $acct = new Account;
-	  // Store attributes
-	  $acct->name = $params["username"];
-	  $acct->phone_number = $params["phone_number"];
-	  $acct->storePassword($params["password"]);
-	  // Save
-	  $acct->save();
-	  // Done
-	  return $acct;
-	}
+  static function create($params)
+  {
+    if ($params["password"] != $params["password_confirmation"]) {
+      return null;
+    }
+    // Create account
+    $acct = new Account;
+    // Store attributes
+    $acct->name = $params["username"];
+    $acct->phone_number = $params["phone_number"];
+    $acct->storePassword($params["password"]);
+    // Save
+    $acct->save();
+    // Done
+    return $acct;
+  }
 
   static function authenticate($username, $password) {
     // Find by username
@@ -54,22 +54,22 @@ class Account {
   }
 
   static function find($username) {
-    return self::findWithConditions("name", $username);
+    return self::findWithConditions("name", 's', $username);
   }
 
   static function findId($id) {
-    return self::findWithConditions("account_id", $id);
+    return self::findWithConditions("account_id", 'i', $id);
   }
 
   static function findPhone($phone) {
-    return self::findWithConditions("phone_number", $phone);
+    return self::findWithConditions("phone_number", 's', $phone);
   }
 
-  static function findWithConditions($field, $value) {
+  static function findWithConditions($field, $type, $value) {
     // Fetch from DB
     global $db; 
     $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3, phone_number FROM accounts WHERE ".$field."=?");
-    $stmt->bind_param('s', $value);
+    $stmt->bind_param($type, $value);
     $stmt->execute();
     // Store attributes
     $acct = new Account();
@@ -84,13 +84,13 @@ class Account {
 
   function storePassword($plaintext) {
     /* generate salt */
-  	$characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  	$i = 0;
-  	$this->salt = "";
-  	do {
-  		$this->salt .= $characterList{mt_rand(0,strlen($characterList))};
-  		$i++;
-  	} while ($i < 16);
+    $characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $i = 0;
+    $this->salt = "";
+    do {
+      $this->salt .= $characterList{mt_rand(0,strlen($characterList))};
+      $i++;
+    } while ($i < 16);
     $this->password = $this->cryptPassword($plaintext);
   }
 
