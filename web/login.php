@@ -11,25 +11,33 @@
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+
+	<script type="text/javascript" src="script/script.js"></script>
+
 </head> 
 
 <body> 
-	<div data-role="page" data-theme="b" id="jqm-home">
+	<div data-role="page" data-theme="b" id="login">
 		<div id='title'>
 			<h1>Traeder - Log In</h1>
 		</div>
 		
 		<div data-role="content">
-			<div data-role="fieldcontain">
 	
-				<form action="form.php" method="post">
+				<form id='login_form'>
+				
+					<div data-role="fieldcontain">
+						<lable for='login_username'>Username</label> 
+						<input type='text' id='login_username' 	name='login_username'/>
+					</div> 
 					
-					<lable for='login_username'>Username</label> 
-					<input type='text' id='login_username' 	name='login_username'/>
+					<div data-role="fieldcontain">
+						<lable for='login_password'>Password</label> 
+						<input type='text' id='login_password' 	name='login_password'/>			
+					</div>
 					
-					<lable for='login_password'>Password</label> 
-					<input type='text' id='login_password' 	name='login_password'/>			
-							
+					<input type='button' id='login_submit' name='login_submit'  value='login' / > 
+					
 				</form>		
 			</div>
 		</div>
