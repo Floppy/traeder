@@ -21,12 +21,10 @@ class Transaction
 	  $tr = new Transaction;
     // Generate shortcode
   	$characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  	$i = 0;
   	$tr->code = "";
   	do {
-  		$tr->code .= $characterList{mt_rand(0,strlen($characterList))};
-  		$i++;
-  	} while ($i < 12);
+  		$tr->code .= $characterList[mt_rand(0,strlen($characterList))];
+  	} while (strlen($tr->code) < 12);
   	// Store attributes
   	$tr->account_id = $acct->id;
   	$tr->amount = $amount;
