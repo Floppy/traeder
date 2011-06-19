@@ -29,7 +29,6 @@
     		$return = '['."\n";
 	    	$return .= '{ID: "'.$data->id.'",
   	  							 name: "'.$data->name.'",
-    								 address: "'.$address.'",
     								 balance: "'.$data->balance().'}'."\n";
     		$return .= '  ]'."\n";
     	}
