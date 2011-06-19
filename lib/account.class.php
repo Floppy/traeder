@@ -16,30 +16,34 @@ class Account {
   public $address_1;
   public $address_2;
   public $address_3;
+  public $balance;
   protected $password;
   protected $salt;
 
-  function __construct()
-  {
-    return true;
-  }
+	function __construct()
+	{
+		return true;
+	}
 
-  static function create($params)
-  {
-    if ($params["password"] != $params["password_confirmation"]) {
-      return null;
-    }
-    // Create account
-    $acct = new Account;
-    // Store attributes
-    $acct->name = $params["username"];
-    $acct->phone_number = $params["phone_number"];
-    $acct->storePassword($params["password"]);
-    // Save
-    $acct->save();
-    // Done
-    return $acct;
-  }
+	static function create($params)
+	{
+	  if ($params["password"] != $params["password_confirmation"]) {
+	    return null;
+	  }
+	  // Create account
+	  $acct = new Account;
+	  // Store attributes
+	  $acct->name = $params["username"];
+	  $acct->phone_number = $params["phone_number"];
+	  $acct->address_1 = $params["address_1"];
+	  $acct->address_2 = $params["address_2"];
+	  $acct->address_3 = $params["address_3"];
+	  $acct->storePassword($params["password"]);
+	  // Save
+	  $acct->save();
+	  // Done
+	  return $acct;
+	}
 
   static function authenticate($username, $password) {
     // Find by username
@@ -115,21 +119,24 @@ class Account {
     $stmt->fetch();
     $stmt->close();
     $this->balance += 42.0; // Opening balance - everyone gets 42 free kittens. This will do for now, it's a hackday!!
-    $this->save();
+    //$this->save();
     return $this->balance;
   }
 
   function save() {
     global $db;
+
     if ($this->id) {
-      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? WHERE account_id=?");
-      $stmt->bind_param('ssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->id);
+      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? , address_1=?, address_2=?, address_3=?, balance=?  WHERE account_id=?");
+      echo 'alive';
+      $stmt->bind_param('ssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3, $this->balance, $this->id);
+      echo 'alive';
       $stmt->execute();
       $stmt->close();
     }
     else {
-      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password, phone_number) VALUES (?,?,?,?)");
-      $stmt->bind_param('ssss', $this->name, $this->salt, $this->password, $this->phone_number);
+      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password, phone_number, address_1, address_2, address_3) VALUES (?,?,?,?,?,?,?)");
+      $stmt->bind_param('ssss', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3);
       $stmt->execute();
       $stmt->close();
       $stmt = $db->prepare("SELECT LAST_INSERT_ID()");
