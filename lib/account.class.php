@@ -3,9 +3,9 @@
 require_once('config.inc.php');
 
 /*
- * account.php
- * Basic account information
- */
+* account.php
+* Basic account information
+*/
 
 class Account {
 
@@ -57,22 +57,22 @@ class Account {
   }
 
   static function find($username) {
-    return self::findWithConditions("name", $username);
+    return self::findWithConditions("name", 's', $username);
   }
 
   static function findId($id) {
-    return self::findWithConditions("account_id", $id);
+    return self::findWithConditions("account_id", 'i', $id);
   }
 
   static function findPhone($phone) {
-    return self::findWithConditions("phone_number", $phone);
+    return self::findWithConditions("phone_number", 's', $phone);
   }
 
-  static function findWithConditions($field, $value) {
+  static function findWithConditions($field, $type, $value) {
     // Fetch from DB
     global $db;
     $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3, phone_number FROM accounts WHERE ".$field."=?");
-    $stmt->bind_param('s', $value);
+    $stmt->bind_param($type, $value);
     $stmt->execute();
     // Store attributes
     $acct = new Account();

@@ -6,3 +6,8 @@ $_GLOBALS['db_name'] = 'db_name';
 $_GLOBALS['db_user'] = 'db_user';
 $_GLOBALS['db_password'] = 'db_password';
 $_GLOBALS['db_host'] = 'localhost';
+
+$_GLOBALS['txtlocal_user'] = 'test@example.com';
+$_GLOBALS['txtlocal_pass'] = 'pass';
+$_GLOBALS['txtlocal_id'] = 'TRAEDER';
+$_GLOBALS['txtlocal_from'] = 'Traeder';
