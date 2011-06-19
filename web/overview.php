@@ -14,10 +14,10 @@
 </head> 
 
 <body> 
-	<div data-role="page" data-theme="b" id="jqm-home">
-		<div id='title'>
-			<h1>Traeder - Transactions overview</h1>
-		</div>
+	<div data-role="page" data-theme="traeder" id="jqm-home">
+		<header>
+			<h1>Traeder</h1>
+		</header>
 		
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
@@ -26,6 +26,14 @@
 				<li><a><strong>Hotel Stay</strong> in <strong>Ashford</strong>. Debit: 10 carbon points</a></li>
 			</ul>
 		</div>
+
+		<footer>
+			<ul>
+				<li><a id='help' href='help.php'>Help</a></li>
+				<li><a id='profile' href='/accounts/profile'>Edit profile</a></li>
+				<li><a id='logout' href='/accounts/logout'>Log out</a></li>
+			</ul>		
+		</footer>
 	</div>
 </body>
 </html>

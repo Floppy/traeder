@@ -14,48 +14,37 @@
 </head> 
 
 <body> 
-<div data-role="page" data-theme="b" id="jqm-home">
-	<div id='title'>
-		<h1>Traeder</h1>
-		
-		<a id='log_out' href='accounts/logout'>Log Out</a>
-	</div>
+	<div data-role="page" data-theme="traeder" id="jqm-home">
+		<header>
+			<h1>Traeder</h1>
+		</header>
 
-	
-	<div data-role="content">
-		
-		<form action="transactions/new" method="post">
-
+		<div data-role="content">
+			<form action="transactions/new" method="post">
 				<div data-role="fieldcontain">
-					
 					<label for='new_transaction_type' class='select'>Transaction type</label>
-					
 					<select name='new_transaction_type' id='new_transaction_type' > 
 						<option value='credit'>Payment from me</option>
-						
 						<option value='debit'>Payment to me</option>
-
 					</select> 
-				
 				</div>
 				
 				<div data-role="fieldcontain">
-				
-					<lable for='new_transaction_amount'>Amount</label> 
+					<label for='new_transaction_amount'>Amount</label> 
 					<input type='text' id='new_transaction_amount' 	name='new_transaction_amount'/>			
-				
 				</div>
-				
-				<input type='submit' id='login_submit' name='login_submit' value='Log In' />
-				
-			</div>
-			
-		</form>
-		
-		
-	</div>
+				<input type='submit' id='login_submit' name='login_submit' value='Log In' />			
+			</form>
+		</div>
 
-</div>
+		<footer>
+			<ul>
+				<li><a id='help' href='help.php'>Help</a></li>
+				<li><a id='profile' href='/accounts/profile'>Edit profile</a></li>
+				<li><a id='logout' href='/accounts/logout'>Log out</a></li>
+			</ul>		
+		</footer>
+	</div>
 </body>
 </html>
 

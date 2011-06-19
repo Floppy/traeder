@@ -600,6 +600,123 @@
 }
 
 
+/* custom-traeder-thingees
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-bar-traeder {
+	border: 1px solid 		#F7C942;
+	background: 			#fadb4e;
+	color: 					#333;
+	text-shadow: 0 1px 0 	#fff;
+	background-image: -moz-linear-gradient(top, 
+							#fceda7, 
+							#fadb4e);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#fceda7),
+		color-stop(1, 		#fadb4e));
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fceda7', EndColorStr='#fadb4e')";
+}
+.ui-bar-traeder,
+.ui-bar-traeder input,
+.ui-bar-traeder select,
+.ui-bar-traeder textarea,
+.ui-bar-traeder button {
+	font-family: Helvetica, Arial, sans-serif;
+}
+.ui-bar-traeder .ui-link-inherit {
+	color: 					#333;
+}
+.ui-bar-traeder .ui-link {
+	color: 					#2489CE;
+	font-weight: bold;
+}
+.ui-body-traeder {
+	border: 1px solid 		#F7C942;
+	color: 					#333333;
+	text-shadow: 0 1px 0 	#cff;
+	background: 			#6cc;
+	background-image: -moz-linear-gradient(top, 
+							#cff, 
+							#6cc);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#cdd),
+		color-stop(1, 		#6cc));
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ccffff', EndColorStr='#66cccc')";
+}
+.ui-body-traeder,
+.ui-body-traeder input,
+.ui-body-traeder select,
+.ui-body-traeder textarea,
+.ui-body-traeder button {
+	font-family: Helvetica, Arial, sans-serif;
+}
+.ui-body-traeder .ui-link-inherit {
+	color: 					#333333;
+}
+.ui-body-traeder .ui-link {
+	color: 					#2489CE;
+	font-weight: bold;
+}
+.ui-btn-up-traeder {
+	border: 1px solid 		#F7C942;
+	background: 			#fadb4e;
+	font-weight: bold;
+	color: 					#333;
+	text-shadow: 0 1px 0 	#fff;
+	background-image: -moz-linear-gradient(top, 
+							#fceda7, 
+							#fadb4e);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#fceda7),
+		color-stop(1, 		#fadb4e));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fceda7', EndColorStr='#fadb4e')";
+}
+.ui-btn-up-traeder a.ui-link-inherit {
+	color: 					#333;
+}
+.ui-btn-hover-traeder {
+	border: 1px solid 		#e79952;
+	background: 			#fbe26f;
+	font-weight: bold;
+	color: 					#111;
+	text-shadow: 0 1px 1px 	#fff;
+	background-image: -moz-linear-gradient(top, 
+							#fcf0b5, 
+							#fbe26f);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#fcf0b5),
+		color-stop(1, 		#fbe26f));
+  	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fcf0b5', EndColorStr='#fbe26f')";
+}
+
+.ui-btn-hover-traeder a.ui-link-inherit {
+	color: 					#333;
+}
+.ui-btn-down-traeder {
+	border: 1px solid 		#F7C942;
+	background: 			#fceda7;
+	font-weight: bold;
+	color: 					#111;
+	text-shadow: 0 1px 1px 	#ffffff;
+	background-image: -moz-linear-gradient(top, 
+							#fadb4e, 
+							#fceda7);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#fadb4e),
+		color-stop(1, 		#fceda7));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fadb4e', EndColorStr='#fceda7')";
+}
+.ui-btn-down-traeder a.ui-link-inherit {
+	color: 					#333;
+}
+.ui-btn-up-traeder,
+.ui-btn-hover-traeder,
+.ui-btn-down-traeder {
+	font-family: Helvetica, Arial, sans-serif;
+	text-decoration: none;
+}
+
+
 /* links within "buttons" 
 -----------------------------------------------------------------------------------------------------------*/
 

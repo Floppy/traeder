@@ -23,11 +23,21 @@
 			$data = $account->find($accountID);
     	$return = '['."\n";
 
-    	//$return .= '{ID: "'.$account->id().'", name: "'.$account->name().'", address: "'.$account->address().'"},'."\n";
-    	$return .= '{Balance: "'.$account->balance().'"},'."\n";
-
+    	$return .= '{ID: "'.$account->id.'",
+    							 name: "'.$account->name.'",
+    							 address: "'.$account->address_1."\n".$account->address_2."\n".$account->address_3.'",
+    							 balance: "'.$account->balance().'}'."\n";
     	$return .= '  ]'."\n";
     	return $return;
+    }
+
+    function post_login()
+    {
+    	print_r($_POST);
+    	if (isset($_POST['username']) && isset($_POST['password']))
+    	{
+				$account = Account::authenticate($_POST['username'], $_POST['password']);
+    	}
     }
 
     function create_account()
@@ -49,6 +59,7 @@
   $app->get('/api/', 'get_index');
   $app->get('/account/api/create', 'create_account');
   $app->get('/account/api/:accountID', 'get_account');
+  $app->post('/account/api/authenticate', 'post_login');
 
 
   $app->get('/transaction/api/:issuecode', 'get_transaction');

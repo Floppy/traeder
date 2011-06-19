@@ -15,13 +15,21 @@
 
 <body> 
 	<div data-role="page" data-theme="b" id="jqm-home">
-		<div id='title'>
+		<header>
 			<h1>Traeder</h1>
-			
-			<a id='log_out' href='accounts/logout'>Log Out</a>
+		</header>
+		
+		<div data-role="content">
+			[tbd]
 		</div>
 		
-		<div data-role="content"></div>
+		<footer>
+			<ul>
+				<li><a id='help' href='help.php'>Help</a></li>
+				<li><a id='profile' href='/accounts/profile'>Edit profile</a></li>
+				<li><a id='logout' href='/accounts/logout'>Log out</a></li>
+			</ul>		
+		</footer>
 	</div>
 </body>
 </html>

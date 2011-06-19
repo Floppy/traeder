@@ -13,6 +13,9 @@ class Account {
   public $id;
   public $name;
   public $phone_number;
+  public $address_1;
+  public $address_2;
+  public $address_3;
   protected $password;
   protected $salt;
 
@@ -60,6 +63,7 @@ class Account {
 
   static function findWithConditions($field, $value) {
     // Fetch from DB
+<<<<<<< HEAD
     global $db; 
     $stmt = $db->prepare("SELECT name, salt, password, account_id, phone_number FROM accounts WHERE ".$field."=?");
     $stmt->bind_param('s', $value);
@@ -67,6 +71,15 @@ class Account {
     // Store attributes
     $acct = new Account();
     $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->phone_number);
+=======
+    global $db;
+    $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3 FROM accounts WHERE name=?");
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    // Store attributes
+    $acct = new Account();
+    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->address_1,$acct->address_2,$acct->address_3);
+>>>>>>> 4b2dcf1d9ed84147e7e6fc4c343805c9ae216780
     $stmt->fetch();
     $stmt->close();
     if($acct->id)
