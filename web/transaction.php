@@ -14,7 +14,7 @@
 </head> 
 
 <body> 
-	<div data-role="page" data-theme="b" id="jqm-home">
+	<div data-role="page" data-theme="traeder" id="jqm-home">
 		<header>
 			<h1>Traeder</h1>
 		</header>
