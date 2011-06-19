@@ -31,6 +31,14 @@
     	return $return;
     }
 
+    function post_login()
+    {
+    	if (isset($_POST['username']) && isset($_POST['password']))
+    	{
+
+    	}
+    }
+
     function create_account()
     {
     	return 'you want to create a new account ';
@@ -50,6 +58,7 @@
   $app->get('/api/', 'get_index');
   $app->get('/account/api/create', 'create_account');
   $app->get('/account/api/:accountID', 'get_account');
+  $app->post('/account/authenticate/', 'post_login');
 
 
   $app->get('/transaction/api/:issuecode', 'get_transaction');
