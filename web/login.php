@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<title>traeder.org - log in</title>
@@ -13,6 +12,10 @@
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 
 	<script type="text/javascript" src="script/script.js"></script>
+
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
 
 </head> 
 
@@ -37,9 +40,9 @@
 					</div>
 					
 					<input type='button' id='login_submit' name='login_submit'  value='login' / > 
-					
+
 				</form>		
-			</div>
+		
 		</div>
 	</div>
 </body>
