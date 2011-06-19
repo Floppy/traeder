@@ -23,12 +23,10 @@ $acct1 = Account::findPhone($rcv_num);
 $tr = Transaction::create($acct1, $amt, true);
 // Send SMS code
 SMSHelper::send(SMSHelper::smsUrl($tr));
-printf($tr->code);
 
 // Get confirmation from client
 printf("CLIENT: Enter transaction code to confirm\n");
 $code = trim(fgets(STDIN));
-printf($code);
 $rcv_num = $client_num
 $tr = Transaction::find($code);
 // Accept the transaction on behalf of the client
