@@ -27,13 +27,10 @@ class TransactionTest extends PHPUnit_Framework_TestCase
     $tr = Transaction::find($tr->code);
     $this->assertEquals(strlen($tr->code), 12);
     // Accept the transaction on behalf of the client
-    //$tr->accept(self::$client);
-    // Check both transactions are now NOT pending
-    //$this->assertEquals($tr->status, 1);
-    //$this->assertEquals($tr2->status, 1);
+    $tr->accept(self::$client);
     // Check balances
-    //$this->assertEquals($this->vendor->balance(), 47.0);
-    //$this->assertEquals($this->client->balance(), 37.0);
+    //$this->assertEquals($this->vendor->balance, 47.0);
+    //$this->assertEquals($this->client->balance, 37.0);
   }
 
   static function tearDownAfterClass() {

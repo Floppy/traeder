@@ -17,15 +17,19 @@ class Transaction
 		return true;
 	}
 
-	public static function create($acct, $amount, $pending) {
+	public static function create($acct, $amount, $pending, $code=null) {
 	  // Make new object
 	  $tr = new Transaction;
     // Generate shortcode
   	$characterList = "0123456789";
-  	$tr->code = "";
-  	do {
-  		$tr->code .= $characterList[mt_rand(0,strlen($characterList))];
-  	} while (strlen($tr->code) < 12);
+  	if ($code)
+  	  $tr->code = $code;
+	  else {
+    	$tr->code = "";
+    	do {
+    		$tr->code .= $characterList[mt_rand(0,strlen($characterList))];
+    	} while (strlen($tr->code) < 12);
+  	}
   	// Store attributes
   	$tr->account_id = $acct->id;
   	$tr->amount = $amount;
@@ -73,8 +77,13 @@ class Transaction
     }
   }
   
-  public function delete() {
-    
+  public function accept($acct) {
+    // Mark as no longer pending
+    $this->status = 1;
+    $this->save();
+    // Create opposite transaction in client account
+    Transaction::create($acct, -$this->amount, false, $this->code);
+    // Update balances on both accounts
   }
 
 }
