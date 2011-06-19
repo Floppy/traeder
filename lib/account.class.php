@@ -10,7 +10,7 @@ require_once('config.inc.php');
 class Account {
 
   /* properties */
-  protected $id;
+  public $id;
   public $name;
   protected $password;
   protected $salt;
@@ -98,7 +98,7 @@ class Account {
 
   function save() {
     global $db;
-    if ($id) {
+    if ($this->id) {
       $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=? WHERE id=?");
       $stmt->bind_param('sssi', $this->name, $this->salt, $this->password, $this->id);
       $stmt->execute();
@@ -108,6 +108,11 @@ class Account {
       $stmt = $db->prepare("INSERT INTO accounts (name, salt, password) VALUES (?,?,?)");
       $stmt->bind_param('sss', $this->name, $this->salt, $this->password);
       $stmt->execute();
+      $stmt->close();
+      $stmt = $db->prepare("SELECT LAST_INSERT_ID()");
+      $stmt->execute();
+      $stmt->bind_result($this->id);
+      $stmt->fetch();
       $stmt->close();
     }
   }

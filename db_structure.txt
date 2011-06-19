@@ -59,7 +59,7 @@ CREATE TABLE `transactions` (
   `account_id` int(10) NOT NULL,
   `amount` int(10) NOT NULL,
   `units` varchar(20) NOT NULL,
-  `code` int(15) NOT NULL,
+  `code` varchar(12) NOT NULL,
   `status` varchar(10) NOT NULL,
   `expires` varchar(10) NOT NULL,
   `time_stamp` varchar(10) NOT NULL,

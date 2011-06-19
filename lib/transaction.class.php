@@ -7,16 +7,17 @@
 class Transaction
 {
   
+  public $id;
   public $code;
   public $amount;
-  protected $account_id;
+  public $account_id;
   
 	function __construct()
 	{
 		return true;
 	}
 
-	public function createPending($acct, $amount) {
+	public static function createPending($acct, $amount) {
 	  // Make new object
 	  $tr = new Transaction;
     // Generate shortcode
@@ -33,11 +34,28 @@ class Transaction
   	$tr->save();
   	return $tr;
 	}
+	
+	public static function find($code) {
+    // Fetch from DB
+    global $db; 
+    $stmt = $db->prepare("SELECT transaction_id, amount, code, account_id, status FROM transactions WHERE code=?");
+    $stmt->bind_param('s', $code);
+    $stmt->execute();
+    // Store attributes
+    $tr = new Transaction();
+    $stmt->bind_result($tr->id, $tr->amount,$tr->code,$tr->account_id,$tr->status);
+    $stmt->fetch();
+    $stmt->close();
+    if($tr->id)
+      return $tr;
+    else
+      return null;
+	}
 
   function save() {
     global $db;
-    if ($id) {
-      $stmt = $db->prepare("UPDATE transactions SET amount=?, code=?, account_id=?, status=? WHERE id=?");
+    if ($this->id) {
+      $stmt = $db->prepare("UPDATE transactions SET amount=?, code=?, account_id=?, status=? WHERE transaction_id=?");
       $stmt->bind_param('dssii', $this->amount, $this->code, $this->account_id, $this->status, $this->id);
       $stmt->execute();
       $stmt->close();
@@ -46,6 +64,11 @@ class Transaction
       $stmt = $db->prepare("INSERT INTO transactions (amount, code, account_id, status) VALUES (?,?,?,?)");
       $stmt->bind_param('dssi', $this->amount, $this->code, $this->account_id, $this->status);
       $stmt->execute();
+      $stmt->close();
+      $stmt = $db->prepare("SELECT LAST_INSERT_ID()");
+      $stmt->execute();
+      $stmt->bind_result($this->id);
+      $stmt->fetch();
       $stmt->close();
     }
   }
