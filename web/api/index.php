@@ -84,6 +84,12 @@
     	return 'view transaction: '.$issuecode;
     }
 
+    function transaction_receive ()
+    {
+    	echo "receiving transaction";
+    	print_r ($_REQUEST);
+    }
+
   }
 
   $app = new TraederApi();
@@ -96,6 +102,7 @@
   $app->get('/account/api/:accountID', 'get_account');
   $app->post('/account/api/authenticate', 'post_login');
 
+  $app->get('/transaction/api/receive', 'transaction_receive');
 	$app->post('/transaction/api/create', 'post_transaction');
   $app->get('/transaction/api/:issuecode', 'get_transaction');
 
