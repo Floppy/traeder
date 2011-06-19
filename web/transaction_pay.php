@@ -1,7 +1,12 @@
-<!DOCTYPE html>
+<?php
+
+	// just for now
+	$loggedin = 1;
+	
+?><!DOCTYPE html>
 <html>
 <head>
-	<title>traeder.org - transactions overview</title>
+	<title>traeder.org - transactions</title>
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
@@ -22,13 +27,22 @@
 		<header>
 			<img src="style/images/logo.small.png" alt="traeder.org logo">
 		</header>
-		
+
 		<div data-role="content">
-			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
-				<li data-role="list-divider">Previous transactions</li>
-				<li><a><strong>Petrol</strong> in <strong>canterbury</strong>. Debit: 20 carbon points</a></li>
-				<li><a><strong>Hotel Stay</strong> in <strong>Ashford</strong>. Debit: 10 carbon points</a></li>
-			</ul>
+<?php if ($loggedin): ?>
+			
+			<form action="transactions/new" method="post">
+				<div data-role="fieldcontain">
+					<label for='new_transaction_amount'>Amount</label> 
+					<input type='text' id='new_transaction_amount' name='new_transaction_amount'/>	
+				</div>
+				
+				<input type='submit' id='transaction_submit' name='transaction_submit' value='Make payment' />			
+			</form>
+<?php else: // not logged in ?>
+			<input type='submit' id='login_submit' name='login_submit' value='Log In' />			
+<?php endif; ?>
+
 		</div>
 
 		<footer>

@@ -9,3 +9,14 @@ body {
 header {
 	display: block;
 	margin: 20px }
+
+footer {
+	display: block;
+	margin: 20px }
+
+footer ul {
+	text-align: center }
+footer ul li {
+	display: inline;
+	list-style-type: none;
+	margin: 0 12px }
