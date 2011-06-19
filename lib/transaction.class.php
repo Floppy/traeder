@@ -20,7 +20,7 @@ class Transaction
 	  // Make new object
 	  $tr = new Transaction;
     // Generate shortcode
-  	$characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  	$characterList = "0123456789";
   	$tr->code = "";
   	do {
   		$tr->code .= $characterList[mt_rand(0,strlen($characterList))];
