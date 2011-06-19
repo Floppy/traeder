@@ -19,21 +19,21 @@
     function get_account($accountID)
     {
 			// call account.class and return details
+			echo $accountID;
 			$account = new Account();
 			$data = $account->find($accountID);
     	$return = '['."\n";
 
-    	$return .= '{ID: "'.$account->id.'",
-    							 name: "'.$account->name.'",
-    							 address: "'.$account->address_1."\n".$account->address_2."\n".$account->address_3.'",
-    							 balance: "'.$account->balance().'}'."\n";
+    	$return .= '{ID: "'.$data->id.'",
+    							 name: "'.$data->name.'",
+    							 address: "'.$data->address_1."\n".$data->address_2."\n".$data->address_3.'",
+    							 balance: "'.$data->balance().'}'."\n";
     	$return .= '  ]'."\n";
     	return $return;
     }
 
     function post_login()
     {
-    	print_r($_POST);
     	if (isset($_POST['username']) && isset($_POST['password']))
     	{
 				$account = Account::authenticate($_POST['username'], $_POST['password']);
@@ -43,6 +43,11 @@
     function create_account()
     {
     	return 'you want to create a new account ';
+    }
+
+    function post_transaction()
+    {
+
     }
 
     function get_transaction($issuecode)
@@ -61,8 +66,9 @@
   $app->get('/account/api/:accountID', 'get_account');
   $app->post('/account/api/authenticate', 'post_login');
 
-
+	$app->post('/transaction/api/create', 'post_transaction');
   $app->get('/transaction/api/:issuecode', 'get_transaction');
+
 
 
 
