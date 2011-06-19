@@ -62,7 +62,7 @@ CREATE TABLE `transactions` (
   `code` varchar(12) NOT NULL,
   `status` varchar(10) NOT NULL,
   `expires` varchar(10) NOT NULL,
-  `time_stamp` varchar(10) NOT NULL,
+  `time_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`transaction_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
