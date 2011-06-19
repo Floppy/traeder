@@ -19,7 +19,7 @@ class TransactionTest extends PHPUnit_Framework_TestCase
   
   function testTransactions() {
     // Create a transaction as the vendor
-    $tr = Transaction::createPending(self::$vendor, 5.0);
+    $tr = Transaction::create(self::$vendor, 5.0, true);
     $this->assertEquals(strlen($tr->code), 12);
     $this->assertEquals($tr->status, 0);
     $this->assertEquals($tr->account_id, self::$vendor->id);

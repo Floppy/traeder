@@ -17,7 +17,7 @@ class Transaction
 		return true;
 	}
 
-	public static function createPending($acct, $amount) {
+	public static function create($acct, $amount, $pending) {
 	  // Make new object
 	  $tr = new Transaction;
     // Generate shortcode
@@ -29,7 +29,7 @@ class Transaction
   	// Store attributes
   	$tr->account_id = $acct->id;
   	$tr->amount = $amount;
-  	$tr->status = 0; // pending
+  	$tr->status = $pending ? 0 : 1;
   	// Done
   	$tr->save();
   	return $tr;
