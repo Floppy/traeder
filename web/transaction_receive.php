@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+
+	// just for now
+	$loggedin = 1;
+	
+?><!DOCTYPE html>
 <html>
 <head>
 	<title>traeder.org - transactions</title>
@@ -20,6 +25,8 @@
 		</header>
 
 		<div data-role="content">
+<?php if ($loggedin): ?>
+			
 			<form action="transactions/new" method="post">
 				<div data-role="fieldcontain">
 					<label for='new_transaction_type' class='select'>Transaction type</label>
@@ -31,10 +38,13 @@
 				
 				<div data-role="fieldcontain">
 					<label for='new_transaction_amount'>Amount</label> 
-					<input type='text' id='new_transaction_amount' 	name='new_transaction_amount'/>			
+					<input type='text' id='new_transaction_amount' name='new_transaction_amount'/>			
 				</div>
-				<input type='submit' id='login_submit' name='login_submit' value='Log In' />			
 			</form>
+<?php else: // not logged in ?>
+			<input type='submit' id='login_submit' name='login_submit' value='Log In' />			
+<?php endif; ?>
+
 		</div>
 
 		<footer>

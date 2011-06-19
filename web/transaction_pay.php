@@ -1,12 +1,12 @@
 <?php
 
 	// just for now
-	$loggedin = 0;
+	$loggedin = 1;
 	
 ?><!DOCTYPE html>
 <html>
 <head>
-	<title>traeder.org</title>
+	<title>traeder.org - transactions</title>
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
@@ -23,18 +23,24 @@
 		<header>
 			<img src="style/images/logo.small.png" alt="traeder.org logo">
 		</header>
-		
-		<div data-role="content">
-			<a href="/transaction_pay.php" data-role="button" data-icon="plus" data-iconpos="left" data-theme="d">Make a new transaction</a> 
-			<a href="/transaction_receive.php" data-role="button" data-icon="arrow-d" data-iconpos="left" data-theme="d">Recieve a transaction</a>
 
+		<div data-role="content">
 <?php if ($loggedin): ?>
-	<a href="/overview.php" data-role="button" data-icon="grid" data-iconpos="left" data-theme="e">Previous transactions</a>
+			
+			<form action="transactions/new" method="post">
+				<div data-role="fieldcontain">
+					<label for='new_transaction_amount'>Amount</label> 
+					<input type='text' id='new_transaction_amount' name='new_transaction_amount'/>	
+				</div>
+				
+				<input type='submit' id='transaction_submit' name='transaction_submit' value='Make payment' />			
+			</form>
 <?php else: // not logged in ?>
-			<a href="/login" data-role="button" data-icon="grid" data-iconpos="left" data-theme="e">Log in</a>
+			<input type='submit' id='login_submit' name='login_submit' value='Log In' />			
 <?php endif; ?>
+
 		</div>
-		
+
 		<footer>
 			<ul>
 				<li><a id='help' href='help.php'>Help</a></li>
@@ -45,3 +51,4 @@
 	</div>
 </body>
 </html>
+
