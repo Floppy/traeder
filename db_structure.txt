@@ -28,6 +28,7 @@ CREATE TABLE `accounts` (
   `post_code` text NOT NULL,
   `password` varchar(50) NOT NULL DEFAULT '',
   `balance` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `phone_number` varchar(32) NOT NULL,
   `time_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `salt` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`account_id`)

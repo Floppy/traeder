@@ -633,14 +633,14 @@
 .ui-body-traeder {
 	border: 1px solid 		#F7C942;
 	color: 					#333333;
-	text-shadow: 0 1px 0 	#cff;
-	background: 			#6cc;
+	text-shadow: 0 1px 0 	#6cc;
+	background: 			#cff;
 	background-image: -moz-linear-gradient(top, 
-							#cff, 
-							#6cc);
+							#6cc, 
+							#cff);
 	background-image: -webkit-gradient(linear,left top,left bottom,
-		color-stop(0, 		#cdd),
-		color-stop(1, 		#6cc));
+		color-stop(0, 		#6cc),
+		color-stop(1, 		#cff));
   	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ccffff', EndColorStr='#66cccc')";
 }
 .ui-body-traeder,
