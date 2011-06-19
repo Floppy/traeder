@@ -16,7 +16,7 @@
 <body> 
 	<div data-role="page" data-theme="traeder" id="jqm-home">
 		<header>
-			<h1>Traeder</h1>
+			<img src="style/images/logo.small.png" alt="traeder.org logo">
 		</header>
 	
 		<div data-role="content">
