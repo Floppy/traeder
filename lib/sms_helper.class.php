@@ -4,6 +4,30 @@ require_once('config.inc.php');
 
 class SMSHelper {
   
+  public static function handleCommand($command, $rcv_num) {
+    $cmds = preg_split("/[\s,]+/", $command);
+    if ($cmds[0] == 'WANT') {
+      printf("Handling request\n");
+      // Create a transaction as the vendor
+      $acct = Account::findPhone($rcv_num); 
+      $tr = Transaction::create($acct, $cmds[1], true);
+      // Send SMS code
+      SMSHelper::send(SMSHelper::smsUrl($tr));      
+    }
+    else {
+      printf("Trying to confirm".$cmds[0]."\n");
+      $tr = Transaction::find($cmds[0]);
+      if ($tr) {
+        // Accept the transaction on behalf of the client
+        $acct = Account::findPhone($rcv_num); 
+        $tr2 = $tr->accept($acct);
+        // Confirm
+        SMSHelper::send(SMSHelper::smsUrl($tr));
+        SMSHelper::send(SMSHelper::smsUrl($tr2));
+      }
+    }    
+  }
+  
   public static function smsUrl($tr) {
     global $_GLOBALS;
     if($tr->status == 0) {
@@ -25,6 +49,7 @@ class SMSHelper {
   }
   
   function send($url) {
+    printf($url);
     $ch = curl_init($url);
     $result = curl_exec($ch);
     curl_close($ch);    
