@@ -1,9 +1,4 @@
-<?php
-
-	// just for now
-	$loggedin = 1;
-	
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>traeder.org - log in</title>
@@ -16,40 +11,27 @@
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
-
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
 </head> 
 
 <body> 
-	<div data-role="page" data-theme="traeder" id="jqm-home">
-		<header>
-			<img src="style/images/logo.small.png" alt="traeder.org logo">
-		</header>
+	<div data-role="page" data-theme="b" id="jqm-home">
+		<div id='title'>
+			<h1>Traeder - Log In</h1>
+		</div>
 		
 		<div data-role="content">
 			<div data-role="fieldcontain">
+	
 				<form action="form.php" method="post">
-<?php if ($loggedin): ?>
-
-			<p>You are logged in as #nicename</p>
-			<a href="/login" data-role="button" data-icon="grid" data-iconpos="left" data-theme="e">Log out</a>
-
-<?php else: // not logged in ?>
-
-			<div data-role="fieldcontain">
-				<form action="form.php" method="post">
-					<label for='login_username'>Username</label> 
-					<input type='text' id='login_username' name='login_username'/>
 					
-					<label for='login_password'>Password</label> 
-					<input type='text' id='login_password' name='login_password'/>							
+					<lable for='login_username'>Username</label> 
+					<input type='text' id='login_username' 	name='login_username'/>
+					
+					<lable for='login_password'>Password</label> 
+					<input type='text' id='login_password' 	name='login_password'/>			
+							
 				</form>		
 			</div>
-
-<?php endif; ?>
-
 		</div>
 	</div>
 </body>
