@@ -29,8 +29,8 @@
 		</header>
 		
 		<div data-role="content">
-			<a href="/transaction_pay.php" data-role="button" data-icon="plus" data-iconpos="left" data-theme="d">Make a new transaction</a> 
-			<a href="/transaction_receive.php" data-role="button" data-icon="arrow-d" data-iconpos="left" data-theme="d">Recieve a transaction</a>
+			<a href="/transaction_pay.php" data-role="button" data-icon="plus" data-iconpos="left" data-theme="d">Make a payment</a> 
+			<a href="/transaction_receive.php" data-role="button" data-icon="arrow-d" data-iconpos="left" data-theme="d">Recieve a payment</a>
 
 <?php if ($loggedin): ?>
 	<a href="/overview.php" data-role="button" data-icon="grid" data-iconpos="left" data-theme="e">Previous transactions</a>

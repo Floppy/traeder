@@ -33,17 +33,11 @@
 			
 			<form action="transactions/new" method="post">
 				<div data-role="fieldcontain">
-					<label for='new_transaction_type' class='select'>Transaction type</label>
-					<select name='new_transaction_type' id='new_transaction_type' > 
-						<option value='credit'>Payment from me</option>
-						<option value='debit'>Payment to me</option>
-					</select> 
+					<label for='new_transaction_amount'>Amount</label> 
+					<input type='text' id='new_transaction_amount' name='new_transaction_amount'/>	
 				</div>
 				
-				<div data-role="fieldcontain">
-					<label for='new_transaction_amount'>Amount</label> 
-					<input type='text' id='new_transaction_amount' name='new_transaction_amount'/>			
-				</div>
+				<input type='submit' id='transaction_submit' name='transaction_submit' value='Make payment' />			
 			</form>
 <?php else: // not logged in ?>
 			<input type='submit' id='login_submit' name='login_submit' value='Log In' />			
