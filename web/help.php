@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>traeder.org</title>
+	<title>traeder.org - help</title>
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
@@ -11,7 +11,7 @@
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
-</head> 
+</head>  
 
 <body> 
 	<div data-role="page" data-theme="b" id="jqm-home">
@@ -20,9 +20,7 @@
 		</header>
 		
 		<div data-role="content">
-			<a href="/transactions/new/" data-role="button" data-icon="plus" data-iconpos="top" >Make a new transaction</a> 
-			<a href="/transaction/redeem" data-role="button" data-icon="arrow-d" data-iconpos="bottom">Recieve a transaction</a> 
-			<a href='transaction/list/'>List previous transactions</a>
+			[tbd]
 		</div>
 		
 		<footer>
@@ -35,3 +33,4 @@
 	</div>
 </body>
 </html>
+
