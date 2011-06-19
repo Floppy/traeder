@@ -50,8 +50,7 @@
 
 	    		$return .= '{ID: "'.$data->id.'",
   	  							 name: "'.$data->name.'",
-    								 address: "'.$data->address_1."\n".$data->address_2."\n".$data->address_3.'",
-    								 balance: "'.$data->balance().'}'."\n";
+    								 balance: "'.$data->balance().'"}'."\n";
     			$return .= '  ]'."\n";
 					return $return;
 				}
