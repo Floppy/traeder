@@ -28,9 +28,9 @@ class TransactionTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(strlen($tr->code), 12);
     // Accept the transaction on behalf of the client
     $tr->accept(self::$client);
-    // Check balances
-    //$this->assertEquals($this->vendor->balance, 47.0);
-    //$this->assertEquals($this->client->balance, 37.0);
+    // Check balances are updated OK
+    $this->assertEquals(self::$vendor->balance(), 47.0);
+    $this->assertEquals(self::$client->balance(), 37.0);
   }
 
   static function tearDownAfterClass() {

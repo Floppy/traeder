@@ -14,7 +14,6 @@ class Account {
   public $name;
   protected $password;
   protected $salt;
-  public $balance = 1.00;
 
 	function __construct()
 	{
@@ -33,8 +32,6 @@ class Account {
 	  $acct->storePassword($params["password"]);
 	  // Save
 	  $acct->save();
-	  // Set up initial balance
-	  $acct->balance = 42.0;
 	  // Done
 	  return $acct;
 	}
@@ -93,13 +90,22 @@ class Account {
   }
 
   function balance() {
+    global $db;
+    $stmt = $db->prepare("SELECT SUM(amount) FROM transactions WHERE account_id=? AND status=1");
+    $stmt->bind_param('s', $this->id);
+    $stmt->execute();
+    $stmt->bind_result($this->balance);
+    $stmt->fetch();
+    $stmt->close();
+    $this->balance += 42.0; // Opening balance - everyone gets 42 free kittens. This will do for now, it's a hackday!!
+    $this->save();
     return $this->balance;
   }
 
   function save() {
     global $db;
     if ($this->id) {
-      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=? WHERE id=?");
+      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=? WHERE account_id=?");
       $stmt->bind_param('sssi', $this->name, $this->salt, $this->password, $this->id);
       $stmt->execute();
       $stmt->close();

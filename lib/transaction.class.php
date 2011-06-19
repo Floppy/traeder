@@ -83,7 +83,7 @@ class Transaction
     $this->save();
     // Create opposite transaction in client account
     Transaction::create($acct, -$this->amount, false, $this->code);
-    // Update balances on both accounts
+    // Update balances on both accounts maybe
   }
 
 }
