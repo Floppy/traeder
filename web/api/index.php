@@ -61,6 +61,7 @@
     	{
     		$params[$key] = $value;
     	}
+
     	$newuser = Account::create($params);
     	print_r($newuser);
     }

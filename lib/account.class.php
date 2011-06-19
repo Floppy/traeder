@@ -34,6 +34,9 @@ class Account {
 	  // Store attributes
 	  $acct->name = $params["username"];
 	  $acct->phone_number = $params["phone_number"];
+	  $acct->address_1 = $params["address_1"];
+	  $acct->address_2 = $params["address_2"];
+	  $acct->address_3 = $params["address_3"];
 	  $acct->storePassword($params["password"]);
 	  // Save
 	  $acct->save();
@@ -122,14 +125,14 @@ class Account {
   function save() {
     global $db;
     if ($this->id) {
-      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? WHERE account_id=?");
-      $stmt->bind_param('ssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->id);
+      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? , address_1=?, address_2=?, address_3=?  WHERE account_id=?");
+      $stmt->bind_param('ssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3, $this->id);
       $stmt->execute();
       $stmt->close();
     }
     else {
-      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password, phone_number) VALUES (?,?,?,?)");
-      $stmt->bind_param('ssss', $this->name, $this->salt, $this->password, $this->phone_number);
+      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password, phone_number, address_1, address_2, address_3) VALUES (?,?,?,?,?,?,?)");
+      $stmt->bind_param('ssss', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3);
       $stmt->execute();
       $stmt->close();
       $stmt = $db->prepare("SELECT LAST_INSERT_ID()");
