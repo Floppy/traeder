@@ -20,10 +20,10 @@
 		</header>
 		
 		<div data-role="content">
-			<a href="/transactions/new/" data-role="button" data-icon="plus" data-iconpos="top" >Make a new transaction</a> 
-			<a href="/transaction/redeem" data-role="button" data-icon="arrow-d" data-iconpos="bottom">Recieve a transaction</a> 
-			<a href='transaction/list/'>List previous transactions</a>
-		</div>
+			<a href="/transactions/new/" data-role="button" data-icon="plus" data-iconpos="left" data-theme="d">Make a new transaction</a> 
+			<a href="/transaction/redeem" data-role="button" data-icon="arrow-d" data-iconpos="left" data-theme="d">Recieve a transaction</a>
+			<a href="/transactions" data-role="button" data-icon="grid" data-iconpos="left" data-theme="e">Previous transactions</a>
+		</div><!-- end content-->
 		
 		<footer>
 			<ul>
