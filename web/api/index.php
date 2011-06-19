@@ -19,7 +19,6 @@
     function get_account($accountID)
     {
 			// call account.class and return details
-			echo $accountID;
 			$account = new Account();
 			$data = $account->find($accountID);
     	$return = '['."\n";
@@ -37,6 +36,13 @@
     	if (isset($_POST['username']) && isset($_POST['password']))
     	{
 				$account = Account::authenticate($_POST['username'], $_POST['password']);
+				if ($account) {
+					return get_account($accountID);
+				}
+				else
+				{
+					return '{status:"not logged in"}';
+				}
     	}
     }
 
