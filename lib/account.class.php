@@ -57,29 +57,23 @@ class Account {
     return self::findWithConditions("name", $username);
   }
 
+  static function findId($id) {
+    return self::findWithConditions("account_id", $id);
+  }
+
   static function findPhone($phone) {
     return self::findWithConditions("phone_number", $phone);
   }
 
   static function findWithConditions($field, $value) {
     // Fetch from DB
-<<<<<<< HEAD
     global $db; 
-    $stmt = $db->prepare("SELECT name, salt, password, account_id, phone_number FROM accounts WHERE ".$field."=?");
+    $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3, phone_number FROM accounts WHERE ".$field."=?");
     $stmt->bind_param('s', $value);
     $stmt->execute();
     // Store attributes
     $acct = new Account();
-    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->phone_number);
-=======
-    global $db;
-    $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3 FROM accounts WHERE name=?");
-    $stmt->bind_param('s', $username);
-    $stmt->execute();
-    // Store attributes
-    $acct = new Account();
-    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->address_1,$acct->address_2,$acct->address_3);
->>>>>>> 4b2dcf1d9ed84147e7e6fc4c343805c9ae216780
+    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->address_1,$acct->address_2,$acct->address_3,$acct->phone_number);
     $stmt->fetch();
     $stmt->close();
     if($acct->id)
