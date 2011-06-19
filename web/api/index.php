@@ -23,11 +23,13 @@
 			$data = $account->find($accountID);
 			if (is_object($data))
 			{
+				$address = $data->address_1 ? $data->address_1."\n" : '';
+				$address .= $data->address_2 ? $data->address_2."\n" : '';
+				$address .= $data->address_3 ? $data->address_3."\n" : '';
     		$return = '['."\n";
-
 	    	$return .= '{ID: "'.$data->id.'",
   	  							 name: "'.$data->name.'",
-    								 address: "'.$data->address_1."\n".$data->address_2."\n".$data->address_3.'",
+    								 address: "'.$address.'",
     								 balance: "'.$data->balance().'}'."\n";
     		$return .= '  ]'."\n";
     	}
@@ -42,9 +44,17 @@
     {
     	if (isset($_POST['username']) && isset($_POST['password']))
     	{
-				$account = Account::authenticate($_POST['username'], $_POST['password']);
-				if ($account) {
-					return get_account($accountID);
+				$data = Account::authenticate($_POST['username'], $_POST['password']);
+				if (is_object($data))
+				{
+					$return = '['."\n";
+
+	    		$return .= '{ID: "'.$data->id.'",
+  	  							 name: "'.$data->name.'",
+    								 address: "'.$data->address_1."\n".$data->address_2."\n".$data->address_3.'",
+    								 balance: "'.$data->balance().'}'."\n";
+    			$return .= '  ]'."\n";
+					return $return;
 				}
 				else
 				{
@@ -68,7 +78,7 @@
 
     function post_transaction()
     {
-
+			return 'posted';
     }
 
     function get_transaction($issuecode)

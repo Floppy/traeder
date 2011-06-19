@@ -16,6 +16,7 @@ class Account {
   public $address_1;
   public $address_2;
   public $address_3;
+  public $balance;
   protected $password;
   protected $salt;
 
@@ -118,15 +119,18 @@ class Account {
     $stmt->fetch();
     $stmt->close();
     $this->balance += 42.0; // Opening balance - everyone gets 42 free kittens. This will do for now, it's a hackday!!
-    $this->save();
+    //$this->save();
     return $this->balance;
   }
 
   function save() {
     global $db;
+
     if ($this->id) {
-      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? , address_1=?, address_2=?, address_3=?  WHERE account_id=?");
-      $stmt->bind_param('ssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3, $this->id);
+      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? , address_1=?, address_2=?, address_3=?, balance=?  WHERE account_id=?");
+      echo 'alive';
+      $stmt->bind_param('ssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3, $this->balance, $this->id);
+      echo 'alive';
       $stmt->execute();
       $stmt->close();
     }
