@@ -23,9 +23,10 @@
 			$data = $account->find($accountID);
     	$return = '['."\n";
 
-    	//$return .= '{ID: "'.$account->id().'", name: "'.$account->name().'", address: "'.$account->address().'"},'."\n";
-    	$return .= '{Balance: "'.$account->balance().'"},'."\n";
-
+    	$return .= '{ID: "'.$account->id.'",
+    							 name: "'.$account->name.'",
+    							 address: "'.$account->address_1."\n".$account->address_2."\n".$account->address_3.'",
+    							 balance: "'.$account->balance().'}'."\n";
     	$return .= '  ]'."\n";
     	return $return;
     }
