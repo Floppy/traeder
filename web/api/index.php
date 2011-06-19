@@ -19,16 +19,22 @@
     function get_account($accountID)
     {
 			// call account.class and return details
-			echo $accountID;
 			$account = new Account();
 			$data = $account->find($accountID);
-    	$return = '['."\n";
+			if (is_object($data))
+			{
+    		$return = '['."\n";
 
-    	$return .= '{ID: "'.$data->id.'",
-    							 name: "'.$data->name.'",
-    							 address: "'.$data->address_1."\n".$data->address_2."\n".$data->address_3.'",
-    							 balance: "'.$data->balance().'}'."\n";
-    	$return .= '  ]'."\n";
+	    	$return .= '{ID: "'.$data->id.'",
+  	  							 name: "'.$data->name.'",
+    								 address: "'.$data->address_1."\n".$data->address_2."\n".$data->address_3.'",
+    								 balance: "'.$data->balance().'}'."\n";
+    		$return .= '  ]'."\n";
+    	}
+    	else
+    	{
+    		$return = '['."\n".'{status: "User not on file"}'."\n".']';
+    	}
     	return $return;
     }
 
@@ -37,12 +43,26 @@
     	if (isset($_POST['username']) && isset($_POST['password']))
     	{
 				$account = Account::authenticate($_POST['username'], $_POST['password']);
+				if ($account) {
+					return get_account($accountID);
+				}
+				else
+				{
+					return '{status:"not logged in"}';
+				}
     	}
     }
 
     function create_account()
     {
-    	return 'you want to create a new account ';
+    	print_r($_POST);
+    	$params = array();
+    	foreach($_POST as $key => $value)
+    	{
+    		$params[$key] = $value;
+    	}
+    	$newuser = Account::create($params);
+    	print_r($newuser);
     }
 
     function post_transaction()
@@ -62,7 +82,8 @@
 
   // Define your url mappings. Take advantage of placeholders and regexes for safety.
   $app->get('/api/', 'get_index');
-  $app->get('/account/api/create', 'create_account');
+  //$app->get('/account/api/create', 'create_account');
+  $app->post('/account/api/create', 'create_account');
   $app->get('/account/api/:accountID', 'get_account');
   $app->post('/account/api/authenticate', 'post_login');
 

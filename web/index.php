@@ -1,9 +1,4 @@
-<?php
-
-	// just for now
-	$loggedin = 0;
-	
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>traeder.org</title>
@@ -33,11 +28,11 @@
 			<a href="/transaction/redeem" data-role="button" data-icon="arrow-d" data-iconpos="bottom">Recieve a transaction</a> 
 			<a href='transaction/list/'>List previous transactions</a>
 
-<?php if ($loggedin): ?>
+			<a href="/transaction_pay.php" data-role="button" data-icon="plus" data-iconpos="left" data-theme="d">Make a payment</a> 
+			<a href="/transaction_receive.php" data-role="button" data-icon="arrow-d" data-iconpos="left" data-theme="d">Recieve a payment</a>
+
 	<a href="/overview.php" data-role="button" data-icon="grid" data-iconpos="left" data-theme="e">Previous transactions</a>
-<?php else: // not logged in ?>
-			<a href="/login" data-role="button" data-icon="grid" data-iconpos="left" data-theme="e">Log in</a>
-<?php endif; ?>
+
 		</div>
 		
 		<footer>

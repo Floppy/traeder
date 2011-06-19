@@ -67,7 +67,7 @@ class Account {
 
   static function findWithConditions($field, $value) {
     // Fetch from DB
-    global $db; 
+    global $db;
     $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3, phone_number FROM accounts WHERE ".$field."=?");
     $stmt->bind_param('s', $value);
     $stmt->execute();
@@ -88,7 +88,7 @@ class Account {
   	$i = 0;
   	$this->salt = "";
   	do {
-  		$this->salt .= $characterList{mt_rand(0,strlen($characterList))};
+  		$this->salt .= $characterList{mt_rand(0,strlen($characterList) - 1)};
   		$i++;
   	} while ($i < 16);
     $this->password = $this->cryptPassword($plaintext);
