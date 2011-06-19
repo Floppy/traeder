@@ -19,8 +19,10 @@ class AccountTest extends PHPUnit_Framework_TestCase
   public function testCreateAccount() {
     $acct = Account::create(array("username" => "test", 
                                   "password" => "testpass",
-                                  "password_confirmation" => "testpass"));
+                                  "password_confirmation" => "testpass",
+                                  "phone_number" => "12345"));
     $this->assertEquals("test", $acct->name);
+    $this->assertEquals("12345", $acct->phone_number);
     $this->assertEquals(42.0, $acct->balance());
   }
 
@@ -28,6 +30,12 @@ class AccountTest extends PHPUnit_Framework_TestCase
   public function testFind() {
     $acct = Account::find("test");
     $this->assertEquals("test", $acct->name);
+  }
+
+  /* Check we can find by phone number */
+  public function testFindPhone() {
+    $acct = Account::findPhone("12345");
+    $this->assertEquals("12345", $acct->phone_number);
   }
 
   /* Check we can authenticate users */

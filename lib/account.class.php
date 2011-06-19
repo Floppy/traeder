@@ -12,6 +12,7 @@ class Account {
   /* properties */
   public $id;
   public $name;
+  public $phone_number;
   public $address_1;
   public $address_2;
   public $address_3;
@@ -32,6 +33,7 @@ class Account {
 	  $acct = new Account;
 	  // Store attributes
 	  $acct->name = $params["username"];
+	  $acct->phone_number = $params["phone_number"];
 	  $acct->storePassword($params["password"]);
 	  // Save
 	  $acct->save();
@@ -52,14 +54,26 @@ class Account {
   }
 
   static function find($username) {
+    return self::findWithConditions("name", $username);
+  }
+
+  static function findId($id) {
+    return self::findWithConditions("account_id", $id);
+  }
+
+  static function findPhone($phone) {
+    return self::findWithConditions("phone_number", $phone);
+  }
+
+  static function findWithConditions($field, $value) {
     // Fetch from DB
-    global $db;
-    $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3 FROM accounts WHERE name=?");
-    $stmt->bind_param('s', $username);
+    global $db; 
+    $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3, phone_number FROM accounts WHERE ".$field."=?");
+    $stmt->bind_param('s', $value);
     $stmt->execute();
     // Store attributes
     $acct = new Account();
-    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->address_1,$acct->address_2,$acct->address_3);
+    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->address_1,$acct->address_2,$acct->address_3,$acct->phone_number);
     $stmt->fetch();
     $stmt->close();
     if($acct->id)
@@ -108,14 +122,14 @@ class Account {
   function save() {
     global $db;
     if ($this->id) {
-      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=? WHERE account_id=?");
-      $stmt->bind_param('sssi', $this->name, $this->salt, $this->password, $this->id);
+      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? WHERE account_id=?");
+      $stmt->bind_param('ssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->id);
       $stmt->execute();
       $stmt->close();
     }
     else {
-      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password) VALUES (?,?,?)");
-      $stmt->bind_param('sss', $this->name, $this->salt, $this->password);
+      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password, phone_number) VALUES (?,?,?,?)");
+      $stmt->bind_param('ssss', $this->name, $this->salt, $this->password, $this->phone_number);
       $stmt->execute();
       $stmt->close();
       $stmt = $db->prepare("SELECT LAST_INSERT_ID()");
@@ -126,20 +140,6 @@ class Account {
     }
   }
 
-	function addPhone($data)
-	{
-
-	}
-
-	function updatePhone($data)
-	{
-
-	}
-
-	function deletePhone($data)
-	{
-
-	}
 
   function delete() {
     global $db;

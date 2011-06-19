@@ -2,7 +2,7 @@
 /*
  * local config
  */
-$_GLOBALS['db_name'] = 'db96975_traeder';
-$_GLOBALS['db_user'] = 'db96975_traeder';
-$_GLOBALS['db_password'] = 'traeder1';
+$_GLOBALS['db_name'] = 'db_name';
+$_GLOBALS['db_user'] = 'db_user';
+$_GLOBALS['db_password'] = 'db_password';
 $_GLOBALS['db_host'] = 'localhost';

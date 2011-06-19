@@ -33,9 +33,10 @@
 
     function post_login()
     {
+    	print_r($_POST);
     	if (isset($_POST['username']) && isset($_POST['password']))
     	{
-
+				$account = Account::authenticate($_POST['username'], $_POST['password']);
     	}
     }
 
@@ -58,7 +59,7 @@
   $app->get('/api/', 'get_index');
   $app->get('/account/api/create', 'create_account');
   $app->get('/account/api/:accountID', 'get_account');
-  $app->post('/account/authenticate/', 'post_login');
+  $app->post('/account/api/authenticate', 'post_login');
 
 
   $app->get('/transaction/api/:issuecode', 'get_transaction');
