@@ -8,6 +8,7 @@
   require_once('../../lib/account.class.php');
   require_once('../../lib/transaction.class.php');
   require_once('../../lib/sms_helper.class.php');
+  require_once('../../lib/qr_helper_class.php');
 
 
   class TraederApi extends Fitzgerald {
@@ -80,6 +81,8 @@
 
     function get_transaction($issuecode)
     {
+    	writelog('API says: viewing transaction for confirmation -------------------------------------');
+    	$tr = Transaction::find($issuecode);
     	return 'view transaction: '.$issuecode;
     }
 
@@ -110,7 +113,7 @@
    $app->get('/transaction/api/receive', 'transaction_receive');
    $app->post('/transaction/api/receive', 'transaction_receive');
    $app->post('/transaction/api/create', 'post_transaction');
-   $app->get('/transaction/api/:issuecode', 'get_transaction');
+   $app->get('/transaction/api/view/:issuecode', 'get_transaction');
 
    // let's get this started!
    $app->run();
