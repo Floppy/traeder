@@ -28,9 +28,7 @@
 				$address .= $data->address_2 ? $data->address_2."\n" : '';
 				$address .= $data->address_3 ? $data->address_3."\n" : '';
     		$return = '['."\n";
-	    	$return .= '{ID: "'.$data->id.'",
-  	  							 name: "'.$data->name.'",
-    								 balance: "'.$data->balance().'"}'."\n";
+	    	$return .= '{ID: "'.$data->id.'", name: "'.$data->name.'", address: "'.$address.'", balance: "'.$data->balance().'"}'."\n";
     		$return .= '  ]'."\n";
     	}
     	else
@@ -48,10 +46,7 @@
 				if (is_object($data))
 				{
 					$return = '['."\n";
-
-	    		$return .= '{ID: "'.$data->id.'",
-  	  							 name: "'.$data->name.'",
-    								 balance: "'.$data->balance().'"}'."\n";
+	    		$return .= '{ID: "'.$data->id.'", name: "'.$data->name.'", address: "'.$address.'", balance: "'.$data->balance().'"}'."\n";
     			$return .= '  ]'."\n";
 					return $return;
 				}
@@ -70,7 +65,10 @@
     		$params[$key] = $value;
     	}
     	$newuser = Account::create($params);
-    	print_r($newuser);
+			if (is_object($newuser))
+				return $this->get_account($newuser->name);
+			else
+				return '[ status: "'.$newuser.'"]';
     }
 
     function post_transaction()

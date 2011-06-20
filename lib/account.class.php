@@ -30,10 +30,15 @@ class Account {
 	  if ($params["password"] != $params["password_confirmation"]) {
 	    return "passwords don't match";
 	  }
-	  if (! isset($params['username']))
+	  if (! isset($params['username']) || $params['username'] == '')
 	  {
 	  	return "no username";
 	  }
+	  if (! isset($params['phone_number']) || $params['phone_number'] == '')
+	  {
+	  	return "no phone_number specified";
+	  }
+
 	  // Create account
 	  $acct = new Account;
 	  // Store attributes
