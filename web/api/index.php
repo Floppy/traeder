@@ -7,6 +7,7 @@
   require_once('../../lib/config.inc.php');
   require_once('../../lib/account.class.php');
   require_once('../../lib/transaction.class.php');
+  require_once('../../lib/sms_helper.class.php');
 
 
   class TraederApi extends Fitzgerald {
@@ -86,27 +87,32 @@
 
     function transaction_receive ()
     {
-    	echo "receiving transaction";
-    	print_r ($_REQUEST);
+    	writelog("API says: receiving");
+    	foreach ($_REQUEST as $key=>$value)
+    	{
+    		writelog($key . " => ".$value);
+    	}
+    	$sender = $_POST['sender'];
+    	$content = $_POST['content'];
+    	$cmd = $_POST['comments'];
+    	SMSHelper::handleCommand($cmd, $sender);
     }
 
-  }
+   } // end Class
 
-  $app = new TraederApi();
+   $app = new TraederApi();
 
+   // Define your url mappings. Take advantage of placeholders and regexes for safety.
+   $app->get('/api/', 'get_index');
+   // account-stuff
+   $app->post('/account/api/create', 'create_account');
+   $app->get('/account/api/:accountID', 'get_account');
+   $app->post('/account/api/authenticate', 'post_login');
+   // transaction stuff
+   $app->get('/transaction/api/receive', 'transaction_receive');
+   $app->post('/transaction/api/receive', 'transaction_receive');
+   $app->post('/transaction/api/create', 'post_transaction');
+   $app->get('/transaction/api/:issuecode', 'get_transaction');
 
-  // Define your url mappings. Take advantage of placeholders and regexes for safety.
-  $app->get('/api/', 'get_index');
-  //$app->get('/account/api/create', 'create_account');
-  $app->post('/account/api/create', 'create_account');
-  $app->get('/account/api/:accountID', 'get_account');
-  $app->post('/account/api/authenticate', 'post_login');
-
-  $app->get('/transaction/api/receive', 'transaction_receive');
-	$app->post('/transaction/api/create', 'post_transaction');
-  $app->get('/transaction/api/:issuecode', 'get_transaction');
-
-
-
-
-  $app->run();
+   // let's get this started!
+   $app->run();
