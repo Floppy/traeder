@@ -64,13 +64,11 @@
 
     function create_account()
     {
-    	print_r($_POST);
     	$params = array();
     	foreach($_POST as $key => $value)
     	{
     		$params[$key] = $value;
     	}
-
     	$newuser = Account::create($params);
     	print_r($newuser);
     }
@@ -92,9 +90,9 @@
     	{
     		writelog($key . " => ".$value);
     	}
-    	$sender = $_POST['sender'];
-    	$content = $_POST['content'];
-    	$cmd = $_POST['comments'];
+    	$sender = isset($_REQUEST['sender']) ? $_REQUEST['sender'] : '';
+    	$content = isset($_REQUEST['content']) ? $_REQUEST['content'] : '';
+    	$cmd = isset($_REQUEST['comments']) ? $_REQUEST['comments'] : '';
     	SMSHelper::handleCommand($cmd, $sender);
     }
 
