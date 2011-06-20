@@ -88,9 +88,8 @@
 				$sms_image = QRCode::get_QR_image('sms', $tr->code);
 				$url_image = QRCode::get_QR_image('url', $tr->code);
 			}
-			echo $sms_image;
-			echo $url_image;
-    	return 'view transaction: '.$issuecode;
+			$return = '<h2>Confirm via SMS:</h2><img src="'.$sms_image.'" alt="sms qr code" /><h2>Confirm via web-interface</h2><img src="'.$url_image.'" alt="web qr code">';
+    	return $return.'<br>viewing transaction: '.$issuecode;
     }
 
     function transaction_receive ()
