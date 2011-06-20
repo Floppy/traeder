@@ -5,7 +5,37 @@ body {
 	text-align: center;
 	background: #6cc }
 
+header {
+	display: block;
+	margin: 20px }
+
+.content {
+	width: 800px;
+	margin: 0 auto;
+	font-family: "Lucida Grande";
+	font-size: 16px;
+	text-align: left }
+
+h2 {
+	margin: 0 0 24px 0;
+	font-size: 24px }
+
+dt {
+	margin: 12px 0 3px 0;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: bold;
+	color: yellow }
+dd {
+	font-size: 16px;
+	line-height: 21px }
+
 img {
 	border: 0;
-	margin: 60px 0 0 0 }
+	margin: 200px 0 0 0 }
+body.benefits img {
+	margin: 48px 0 0 0 }
 	
+p {
+	margin: 48px 0 0 0;
+	font-style: italic }
