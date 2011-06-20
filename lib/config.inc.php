@@ -1,7 +1,7 @@
 <?php
 # some configuration
 require_once('config.local.php');
-$_GLOBALE['logfile'] = '/tmp/trader.log';
+$_GLOBALS['logfile'] = '/tmp/traeder.log';
 require_once('global_func.php');
 
 $db = new mysqli($_GLOBALS['db_host'], $_GLOBALS['db_user'], $_GLOBALS['db_password'], $_GLOBALS['db_name']);

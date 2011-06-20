@@ -59,9 +59,11 @@
 
     function create_account()
     {
+			writelog('API says: creating account -----------------------------------------------------------');
     	$params = array();
     	foreach($_POST as $key => $value)
     	{
+				writelog($key .' => '. $value);
     		$params[$key] = $value;
     	}
     	$newuser = Account::create($params);
