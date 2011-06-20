@@ -7,7 +7,7 @@ class SMSHelper {
   public static function handleCommand($command, $rcv_num) {
     $cmds = preg_split("/[\s,]+/", $command);
     if (strtolower($cmds[0]) == 'want') {
-writelog('handle-receive, sms helper');
+			writelog('handle-receive, sms helper');
       // Create a transaction as the vendor
       $acct = Account::findPhone($rcv_num);
       $tr = Transaction::create($acct, $cmds[1], true);
@@ -15,8 +15,7 @@ writelog('handle-receive, sms helper');
       SMSHelper::send(SMSHelper::smsUrl($tr));
     }
     else {
-writelog('handle-confirm');
-      printf("Trying to confirm".$cmds[0]."\n");
+			writelog('handle-confirm: '.$cmds[0]);
       $tr = Transaction::find($cmds[0]);
       if ($tr) {
         // Accept the transaction on behalf of the client
