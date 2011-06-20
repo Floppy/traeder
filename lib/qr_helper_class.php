@@ -38,7 +38,7 @@ class QRCode
 		return $local_url;
 	}
 
-	public function _cache_file($local_cache, $url)
+	protected function _cache_file($local_cache, $url)
 	{
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);

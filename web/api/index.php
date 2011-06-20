@@ -53,7 +53,7 @@
 				}
 				else
 				{
-					return '{status:"not logged in"}';
+					return '[{status: "not logged in"}]';
 				}
     	}
     }
@@ -69,9 +69,13 @@
     	}
     	$newuser = Account::create($params);
 			if (is_object($newuser))
+			{
 				return $this->get_account($newuser->name);
+			}
 			else
-				return '[ status: "'.$newuser.'"]';
+			{
+				return '[{status: "'.$newuser.'"}]';
+			}
     }
 
     function post_transaction()
@@ -87,10 +91,14 @@
 			{
 				$sms_image = QRCode::get_QR_image('sms', $tr->code);
 				$url_image = QRCode::get_QR_image('url', $tr->code);
-			}
-			$return = '<h2>Confirm via SMS:</h2><img src="'.$sms_image.'" alt="sms qr code" /><h2>Confirm via web-interface</h2><img src="'.$url_image.'" alt="web qr code">';
-			$json = '['."\n".'{QRsms: "'.$sms_image.'", QRurl: "'.$url_image.'"}'."\n";
-    	return $return.'<br>viewing transaction: '.$issuecode.'<br> as JSON:'.$json;
+				$return = '<h2>Confirm via SMS:</h2><img src="'.$sms_image.'" alt="sms qr code" /><h2>Confirm via web-interface</h2><img src="'.$url_image.'" alt="web qr code">';
+				$json = '['."\n".'{QRsms: "'.$sms_image.'", QRurl: "'.$url_image.'"}'."\n";
+    		return $return.'<br>viewing transaction: '.$issuecode.'<br> as JSON:'.$json;
+    	}
+    	else
+    	{
+    		return '[{status: "This transaction is not available"}]'."\n";
+    	}
     }
 
     function transaction_receive ()
