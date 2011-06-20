@@ -83,6 +83,13 @@
     {
     	writelog('API says: viewing transaction for confirmation -------------------------------------');
     	$tr = Transaction::find($issuecode);
+			if( is_object($tr) )
+			{
+				$sms_image = QRCode::get_QR_image('sms', $tr->code);
+				$url_image = QRCode::get_QR_image('url', $tr->code);
+			}
+			echo $sms_image;
+			echo $url_image;
     	return 'view transaction: '.$issuecode;
     }
 
