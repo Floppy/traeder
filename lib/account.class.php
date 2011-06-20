@@ -16,6 +16,7 @@ class Account {
   public $address_1;
   public $address_2;
   public $address_3;
+  public $post_code;
   public $balance;
   protected $password;
   protected $salt;
@@ -47,6 +48,7 @@ class Account {
 	  $acct->address_1 = isset($params["address_1"]) ? $params["address_1"] : '';
 	  $acct->address_2 = isset($params["address_2"]) ? $params["address_2"] : '';
 	  $acct->address_3 = isset($params["address_3"]) ? $params["address_3"] : '';
+	  $acct->post_code = isset($params["post_code"]) ? $params["post_code"] : '';
 	  $acct->storePassword($params["password"]);
 	  // Save
 	  $acct->save();
@@ -81,12 +83,12 @@ class Account {
   static function findWithConditions($field, $type, $value) {
     // Fetch from DB
     global $db;
-    $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3, phone_number FROM accounts WHERE ".$field."=?");
+    $stmt = $db->prepare("SELECT name, salt, password, account_id, address_1, address_2, address_3, phone_number, post_code FROM accounts WHERE ".$field."=?");
     $stmt->bind_param($type, $value);
     $stmt->execute();
     // Store attributes
     $acct = new Account();
-    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->address_1,$acct->address_2,$acct->address_3,$acct->phone_number);
+    $stmt->bind_result($acct->name,$acct->salt,$acct->password,$acct->id,$acct->address_1,$acct->address_2,$acct->address_3,$acct->phone_number, $acct->post_code);
     $stmt->fetch();
     $stmt->close();
     if($acct->id)
@@ -136,14 +138,14 @@ class Account {
     global $db;
 
     if ($this->id) {
-      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? , address_1=?, address_2=?, address_3=? WHERE account_id=?");
-      $stmt->bind_param('sssssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3, $this->id);
+      $stmt = $db->prepare("UPDATE accounts SET name=?, salt=?, password=?, phone_number=? , address_1=?, address_2=?, address_3=?, post_code=? WHERE account_id=?");
+      $stmt->bind_param('ssssssssi', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3, $this->post_code, $this->id);
       $stmt->execute();
       $stmt->close();
     }
     else {
-      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password, phone_number, address_1, address_2, address_3) VALUES (?,?,?,?,?,?,?)");
-      $stmt->bind_param('sssssss', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3);
+      $stmt = $db->prepare("INSERT INTO accounts (name, salt, password, phone_number, address_1, address_2, address_3, post_code) VALUES (?,?,?,?,?,?,?,?)");
+      $stmt->bind_param('sssssss', $this->name, $this->salt, $this->password, $this->phone_number, $this->address_1, $this->address_2, $this->address_3, $this->post_code);
       $stmt->execute();
       $stmt->close();
       $stmt = $db->prepare("SELECT LAST_INSERT_ID()");
