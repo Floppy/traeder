@@ -79,7 +79,24 @@
 
 		function post_transaction()
 		{
-			return 'posted';
+			global $_GLOBALS;
+			writelog('API says: new transaction received by web --------------------');
+			$account = new Account();
+			if (isset($_POST['username']))
+			{
+				$acct = $account->find($_POST['username']);
+			}
+			elseif (isset($_POST['phone_number']))
+			{
+				$acct = $account->findPhone($_POST['phone_number']);
+			}
+			if (! is_object($acct)) return '[{status: "user not on file"}]';
+
+			$tr = Transaction::create($acct, $_POST['amount'], true, null, $_POST['description']);
+      // Send SMS code
+      SMSHelper::send(SMSHelper::smsUrl($tr));
+			// give a browser the url of the transaction to fetch the QR codes as well
+			return $this->get_transaction($tr->code);
 		}
 
 		function get_transaction($issuecode)
@@ -97,6 +114,17 @@
 			else
 			{
 				return '[{status: "This transaction is not available"}]'."\n";
+			}
+		}
+
+		function get_confirm_transaction($issuecode)
+		{
+			global $_GLOBALS;
+			writelog('API says: presenting transaction for client -----------');
+			$tr = Transaction::find($issuecode);
+			if( is_object($tr) )
+			{
+				print_r($tr);
 			}
 		}
 
@@ -127,6 +155,7 @@
 	$app->get('/transaction/api/receive', 'transaction_receive');
 	$app->post('/transaction/api/receive', 'transaction_receive');
 	$app->post('/transaction/api/create', 'post_transaction');
+	$app->get('/transaction/api/confirm/:issuecode', 'get_confirm_transaction');
 	$app->get('/transaction/api/view/:issuecode', 'get_transaction');
 
 	// let's get this started!

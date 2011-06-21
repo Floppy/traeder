@@ -28,7 +28,7 @@ class Transaction
 	  else {
     	$tr->code = "";
     	do {
-    		$tr->code .= $characterList[mt_rand(0,strlen($characterList))];
+    		$tr->code .= $characterList[mt_rand(0,strlen($characterList) - 1)];
     	} while (strlen($tr->code) < 12);
   	}
   	// Store attributes
