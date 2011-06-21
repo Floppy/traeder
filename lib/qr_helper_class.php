@@ -28,7 +28,7 @@ class QRCode
 		}
 		elseif ($mode == 'url')
 		{
-			$url = $_GLOBALS['kaywa_url'] .'&d=http%3A%2F%2Ftraeder.cooljapan.nl%2Ftransaction%2Fapi%2Fconfirm%2F'.$code;
+			$url = $_GLOBALS['kaywa_url'] .'&d=http%3A%2F%2F'.$_SERVER['SERVER_NAME'].'%2Ftransaction%2Fapi%2Fconfirm%2F'.$code;
 		}
 		if (!is_file($local_cache))
 		{
